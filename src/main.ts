@@ -1,86 +1,27 @@
-// Type Aliases
+let e = <string | number>"world";
 
-type stringOrNumberArray = (string | number)[];
-
-type stringOrNumber = string | number;
-
-type Guitarist = {
-  name?: string;
-  active: boolean;
-  albums: stringOrNumberArray;
+const addOrConcat = (
+  a: number,
+  b: number,
+  c: "add" | "concat"
+): number | string => {
+  if (c === "add") return a + b;
+  return "" + a + b;
 };
 
-type UserId = stringOrNumber;
+// let myVal: string = addOrConcat(2, 3, 'concat');
+let myVal: string = addOrConcat(2, 3, "concat") as string;
 
-// interface PostId = stringOrNumber;
+// be carefull    !!!!!
+let nextVal: number = addOrConcat(2, 3, "concat") as number;
 
-// Literal types
+// the DOM
 
-let myName: "Dave";
+const img = document.getElementById("#img") as HTMLImageElement;
+const myImg = document.querySelector("img")!;
+const nextImg = (<HTMLImageElement>(
+  document.getElementById("#img")
+)) as HTMLImageElement;
 
-// myName = 'John'
-
-let userName: "Dave" | "John" | "Amy";
-
-userName = "Dave";
-// userName = 'Rachel'
-
-// Functions
-
-const add = (a: number, b: number): number => {
-  return a + b;
-};
-
-const logMessage = (message: any): void => {
-  console.log(message);
-};
-
-logMessage("Hello");
-logMessage(add(3, 5));
-// logMessage(add(3, "3"));
-
-function substract(c: number, d: number): number {
-  return c - d;
-}
-
-substract(3, 2);
-
-type mathFunction = (a: number, b: number) => number;
-
-// interface mathFunction {
-//     (a: number, b: number) : number;
-// }
-
-let multiply: mathFunction = function (c, d) {
-  return c * d;
-};
-
-logMessage(multiply(3, 3));
-
-const sumAll = (a: number, b: number, c = 2): number => {
-  return a + b + c;
-};
-logMessage(sumAll(2, 3, 4));
-logMessage(sumAll(2, 3));
-
-// rest parameters
-
-const total = (a: number, ...nums: number[]): number => {
-  return a + nums.reduce((prev, curr) => prev + curr);
-};
-
-logMessage(total(1, 2, 3, 4));
-
-// never
-
-const createError = (errMsg: string): never => {
-  throw new Error(errMsg);
-};
-
-const infinite = (): void => {
-  let i: number = 1;
-  while (true) {
-    i++;
-    if (i > 100) break;
-  }
-};
+myImg.src;
+img.src;
