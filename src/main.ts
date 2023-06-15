@@ -1,82 +1,86 @@
-let stringArr = ["one", "hey", "Dave"];
-let guitars = ["Start", 4356, "Union"];
-let mixedData = ["EVN", 2342, true];
+// Type Aliases
 
-stringArr[0] = "3";
-stringArr.push("34");
+type stringOrNumberArray = (string | number)[];
 
-guitars[0] = 2344;
-// guitars.unshift(true);
+type stringOrNumber = string | number;
 
-// stringArr = guitars;
-guitars = stringArr;
-
-mixedData = guitars;
-// guitars = mixedData;
-
-let test = [];
-let bands: string[] = [];
-bands.push("Van Halen");
-// bands.push(3);
-
-// Tuple
-
-let myTuple: [string, number, boolean] = ["Dave", 23, true];
-
-let mixed = ["John ", 2, false];
-
-mixed = myTuple;
-// myTuple = mixed;
-
-// myTuple[3] = undefined;
-
-// Objects
-
-let myObj: object;
-myObj = [];
-console.log(typeof myObj);
-
-const exampleObj = {
-  prop1: "Dave",
-  prop2: true,
-};
-
-// exampleObj.prop1 = 34;
-
-interface Guitarist {
+type Guitarist = {
   name?: string;
   active: boolean;
-  albums: (string | number)[];
+  albums: stringOrNumberArray;
+};
+
+type UserId = stringOrNumber;
+
+// interface PostId = stringOrNumber;
+
+// Literal types
+
+let myName: "Dave";
+
+// myName = 'John'
+
+let userName: "Dave" | "John" | "Amy";
+
+userName = "Dave";
+// userName = 'Rachel'
+
+// Functions
+
+const add = (a: number, b: number): number => {
+  return a + b;
+};
+
+const logMessage = (message: any): void => {
+  console.log(message);
+};
+
+logMessage("Hello");
+logMessage(add(3, 5));
+// logMessage(add(3, "3"));
+
+function substract(c: number, d: number): number {
+  return c - d;
 }
 
-let evh: Guitarist = {
-  name: "Eddie",
-  active: false,
-  albums: [1984, 5150, "1993"],
+substract(3, 2);
+
+type mathFunction = (a: number, b: number) => number;
+
+// interface mathFunction {
+//     (a: number, b: number) : number;
+// }
+
+let multiply: mathFunction = function (c, d) {
+  return c * d;
 };
 
-let jp: Guitarist = {
-  name: "Jimmy",
-  active: true,
-  albums: ["I", "II", "1993"],
+logMessage(multiply(3, 3));
+
+const sumAll = (a: number, b: number, c = 2): number => {
+  return a + b + c;
+};
+logMessage(sumAll(2, 3, 4));
+logMessage(sumAll(2, 3));
+
+// rest parameters
+
+const total = (a: number, ...nums: number[]): number => {
+  return a + nums.reduce((prev, curr) => prev + curr);
 };
 
-// evh = jp
+logMessage(total(1, 2, 3, 4));
 
-const greetGuitarist = (guitarist: Guitarist) => {
-  return `Hello ${guitarist.name?.toUpperCase()}`;
+// never
+
+const createError = (errMsg: string): never => {
+  throw new Error(errMsg);
 };
 
-console.log(greetGuitarist(jp));
-
-// enum
-
-enum Grade {
-  U = 3,
-  D,
-  C,
-  B,
-  A,
-}
-
-console.log(Grade.B);
+const infinite = (): void => {
+  let i: number = 1;
+  while (true) {
+    i++;
+    if (i > 100) break;
+  }
+};

@@ -1,56 +1,52 @@
 "use strict";
-let stringArr = ["one", "hey", "Dave"];
-let guitars = ["Start", 4356, "Union"];
-let mixedData = ["EVN", 2342, true];
-stringArr[0] = "3";
-stringArr.push("34");
-guitars[0] = 2344;
-// guitars.unshift(true);
-// stringArr = guitars;
-guitars = stringArr;
-mixedData = guitars;
-// guitars = mixedData;
-let test = [];
-let bands = [];
-bands.push("Van Halen");
-// bands.push(3);
-// Tuple
-let myTuple = ["Dave", 23, true];
-let mixed = ["John ", 2, false];
-mixed = myTuple;
-// myTuple = mixed;
-// myTuple[3] = undefined;
-// Objects
-let myObj;
-myObj = [];
-console.log(typeof myObj);
-const exampleObj = {
-    prop1: "Dave",
-    prop2: true,
+// Type Aliases
+// interface PostId = stringOrNumber;
+// Literal types
+let myName;
+// myName = 'John'
+let userName;
+userName = "Dave";
+// userName = 'Rachel'
+// Functions
+const add = (a, b) => {
+    return a + b;
 };
-let evh = {
-    name: "Eddie",
-    active: false,
-    albums: [1984, 5150, "1993"],
+const logMessage = (message) => {
+    console.log(message);
 };
-let jp = {
-    name: "Jimmy",
-    active: true,
-    albums: ["I", "II", "1993"],
+logMessage("Hello");
+logMessage(add(3, 5));
+// logMessage(add(3, "3"));
+function substract(c, d) {
+    return c - d;
+}
+substract(3, 2);
+// interface mathFunction {
+//     (a: number, b: number) : number;
+// }
+let multiply = function (c, d) {
+    return c * d;
 };
-// evh = jp
-const greetGuitarist = (guitarist) => {
-    var _a;
-    return `Hello ${(_a = guitarist.name) === null || _a === void 0 ? void 0 : _a.toUpperCase()}`;
+logMessage(multiply(3, 3));
+const sumAll = (a, b, c = 2) => {
+    return a + b + c;
 };
-console.log(greetGuitarist(jp));
-// enum
-var Grade;
-(function (Grade) {
-    Grade[Grade["U"] = 3] = "U";
-    Grade[Grade["D"] = 4] = "D";
-    Grade[Grade["C"] = 5] = "C";
-    Grade[Grade["B"] = 6] = "B";
-    Grade[Grade["A"] = 7] = "A";
-})(Grade || (Grade = {}));
-console.log(Grade.B);
+logMessage(sumAll(2, 3, 4));
+logMessage(sumAll(2, 3));
+// rest parameters
+const total = (a, ...nums) => {
+    return a + nums.reduce((prev, curr) => prev + curr);
+};
+logMessage(total(1, 2, 3, 4));
+// never
+const createError = (errMsg) => {
+    throw new Error(errMsg);
+};
+const infinite = () => {
+    let i = 1;
+    while (true) {
+        i++;
+        if (i > 100)
+            break;
+    }
+};
